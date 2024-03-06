@@ -6,7 +6,7 @@ using System.Net;
 namespace CustomerFeedbackAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/feedbacks")]
     public class CustomerFeedbackController : ControllerBase
     {
         private readonly ILogger<CustomerFeedbackController> _logger;
@@ -18,7 +18,7 @@ namespace CustomerFeedbackAPI.Controllers
         ) => (_logger, _customerFeedbackService) = (logger, customerFeedbackService);
 
 
-        [HttpGet("{restaurantId}", Name = "GetFeedback")]
+        [HttpGet("{restaurantId}")]
         public async Task<IActionResult> GetFeedback([FromRoute] int restaurantId)
         {
             try

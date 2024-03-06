@@ -5,7 +5,7 @@ using System.Net;
 namespace FeedbackResponseAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/feedback-responses")]
     public class FeedbackResponseController : ControllerBase
     {
         private readonly ILogger<FeedbackResponseController> _logger;
