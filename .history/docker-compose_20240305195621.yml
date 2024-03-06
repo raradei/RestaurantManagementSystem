@@ -1,0 +1,63 @@
+version: '3.4'
+
+services:
+  mongodb:
+    image: mongo:6-jammy
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+
+  swaggerservice:
+    image: ${DOCKER_REGISTRY-}swaggerservice
+    ports:
+        - "7065:443"
+        - "7066:80"
+    networks:
+        - api-network
+    build:
+      context: .
+      dockerfile: SwaggerService/Dockerfile
+
+  feedbackresponseapi:
+    image: ${DOCKER_REGISTRY-}feedbackresponseapi
+    ports:
+        - "7052:443"
+        - "7053:80"
+    networks:
+        - api-network
+    build:
+      context: .
+      dockerfile: FeedbackResponseAPI/Dockerfile
+
+
+  restaurantmanagementapi:
+    image: ${DOCKER_REGISTRY-}restaurantmanagementapi
+    ports:
+        - "7050:443"
+        - "7051:80"
+    networks:
+        - api-network
+    build:
+      context: .
+      dockerfile: RestaurantManagementAPI/Dockerfile
+
+
+  customerfeedbackapi:
+    image: ${DOCKER_REGISTRY-}customerfeedbackapi
+    ports:
+        - "7207:443"
+        - "7208:80"
+    networks:
+        - api-network
+    build:
+      context: .
+      dockerfile: CustomerFeedbackAPI/Dockerfile
+
+networks:
+  api-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
+

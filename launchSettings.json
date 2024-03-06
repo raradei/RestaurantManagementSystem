@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "swaggerservice": "StartDebugging",
+        "feedbackresponseapi": "StartDebugging",
+        "restaurantmanagementapi": "StartDebugging",
+        "customerfeedbackapi": "StartDebugging"
+      }
+    }
+  }
+}
