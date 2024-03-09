@@ -1,32 +1,26 @@
 ﻿using CustomerFeedbackAPI.Interfaces;
 using CustomerFeedbackAPI.Models;
-using Microsoft.EntityFrameworkCore;
-using RestaurantLibrary.DTOs;
-using RestaurantRepositoryLibrary;
+using RestaurantRepositoryLibrary.Repositories.Interfaces;
 
 namespace CustomerFeedbackAPI.Services
 {
     public class CustomerFeedbackService : ICustomerFeedbackService
     {
-        private readonly RestaurantContext _restaurantContext;
-        public CustomerFeedbackService(RestaurantContext restaurantContext)
-            => (_restaurantContext) = (restaurantContext);
+        private readonly ICustomerFeedbackRepository _customerFeedbackRepository;
+
+        public CustomerFeedbackService(ICustomerFeedbackRepository customerFeedbackRepository)
+            => (_customerFeedbackRepository) = (customerFeedbackRepository);
+
         public async Task<int> Create(int restaurantId, FeedbackCreate request)
         {
-            var customerFeedback = await _restaurantContext.CustomerFeedbacks.AddAsync(request.ToDTO(restaurantId));
-
-            await _restaurantContext.SaveChangesAsync();
-
-            return customerFeedback.Entity.Id;
+            var entry = await _customerFeedbackRepository.Add(request.ToDTO(restaurantId));
+            return entry.Id;
         }
 
         public async Task<IEnumerable<FeedbackDetails>> GetRestaurantFeedback(int restaurantId)
         {
-            return await _restaurantContext.CustomerFeedbacks
-                .Where(x => x.RestaurantId.Equals(restaurantId))
-                .Include(x => x.FeedbackResponse)
-                .Select(x => FeedbackDetails.FromDTO(x))
-                .ToListAsync();
+            var entries = await _customerFeedbackRepository.GetListByRestaurantId(restaurantId);
+            return entries.Select(x => FeedbackDetails.FromDTO(x));
         }
     }
 }

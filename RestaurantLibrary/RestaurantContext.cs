@@ -1,21 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using RestaurantLibrary.DTOs;
+using RestaurantLibrary.DTO;
 
 namespace RestaurantRepositoryLibrary
 {
     public class RestaurantContext : DbContext
     {
-
-        protected readonly IConfigureOptions<string> Configuration;
-        public RestaurantContext(DbContextOptions<RestaurantContext> options) : base(options)
-        {
+        public RestaurantContext(DbContextOptions<RestaurantContext> options) : base(options) { 
             Database.EnsureCreated();
         }
 
-        public DbSet<Restaurant> Restaurants { get; set; }
-        public DbSet<CustomerFeedback> CustomerFeedbacks { get; set; }
-        public DbSet<FeedbackResponse> FeedbackResponses { get; set; }
+        public virtual DbSet<Restaurant> Restaurants { get; set; }
+        public virtual DbSet<CustomerFeedback> CustomerFeedbacks { get; set; }
+        public virtual DbSet<FeedbackResponse> FeedbackResponses { get; set; }
 
     }
 }

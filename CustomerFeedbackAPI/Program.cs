@@ -2,6 +2,8 @@ using CustomerFeedbackAPI.Interfaces;
 using CustomerFeedbackAPI.Services;
 using Microsoft.EntityFrameworkCore;
 using RestaurantRepositoryLibrary;
+using RestaurantRepositoryLibrary.Repositories;
+using RestaurantRepositoryLibrary.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +33,7 @@ if (builder.Environment.IsDevelopment())
     });
 }
 
+builder.Services.AddScoped<ICustomerFeedbackRepository, CustomerFeedbackRepositoy>();
 builder.Services.AddScoped<ICustomerFeedbackService, CustomerFeedbackService>();
 
 var app = builder.Build();

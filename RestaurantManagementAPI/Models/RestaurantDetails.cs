@@ -1,4 +1,4 @@
-﻿using RestaurantLibrary.DTOs;
+﻿using RestaurantLibrary.DTO;
 
 namespace RestaurantManagementAPI.Models
 {

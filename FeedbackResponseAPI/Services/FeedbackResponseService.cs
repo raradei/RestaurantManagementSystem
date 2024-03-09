@@ -1,32 +1,29 @@
 ﻿using FeedbackResponseAPI.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using RestaurantLibrary.DTOs;
-using RestaurantRepositoryLibrary;
+using RestaurantRepositoryLibrary.Repositories.Interfaces;
 
 namespace FeedbackResponseAPI.Services
 {
     public class FeedbackResponseService : IFeedbackResponseService
     {
-        private readonly RestaurantContext _restaurantContext;
+        private readonly IFeedbackResponseRepository _feedbackResponseRepository;
+        private readonly ICustomerFeedbackRepository _customerFeedbackRepository;
 
-        public FeedbackResponseService(RestaurantContext restaurantContext)
-         => (_restaurantContext) = (restaurantContext);
+        public FeedbackResponseService(
+            IFeedbackResponseRepository feedbackResponseRepository,
+            ICustomerFeedbackRepository customerFeedbackRepository
+        ) => (_feedbackResponseRepository, _customerFeedbackRepository) = (feedbackResponseRepository, customerFeedbackRepository);
 
         public async Task<int?> CreateResponse(int customerFeedbackId, string comments)
         {
-            var feedback = await _restaurantContext.CustomerFeedbacks.FirstOrDefaultAsync(x => x.Id.Equals(customerFeedbackId));
+            var feedback = await _customerFeedbackRepository.Get(customerFeedbackId);
 
             if (feedback == null) return null;
 
-            feedback.FeedbackResponse = new FeedbackResponse
-            {
-                Comments = comments,
-                CreatedDate = DateTime.UtcNow,
-            };
+            var entry = await _feedbackResponseRepository.Add(comments);
 
-            await _restaurantContext.SaveChangesAsync();
+            await _customerFeedbackRepository.LinkResponse(customerFeedbackId, entry);
 
-            return feedback.FeedbackResponse.Id;
+            return entry.Id;
         }
     }
 }

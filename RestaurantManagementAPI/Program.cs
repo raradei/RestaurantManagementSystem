@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using RestaurantManagementAPI.Interfaces;
 using RestaurantManagementAPI.Services;
 using RestaurantRepositoryLibrary;
+using RestaurantRepositoryLibrary.Repositories;
+using RestaurantRepositoryLibrary.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +32,7 @@ if (builder.Environment.IsDevelopment())
     });
 }
 
+builder.Services.AddScoped<IRestaurantRepository, RestaurantRepository>();
 builder.Services.AddScoped<IRestaurantService, RestaurantService>();
 
 var app = builder.Build();
