@@ -1,4 +1,4 @@
-﻿namespace RestaurantLibrary.DTO
+﻿namespace RestaurantRepositoryLibrary.DTO
 {
     public class DatabaseSettings
     {

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RestaurantLibrary.DTO;
+using RestaurantRepositoryLibrary.DTO;
 using RestaurantRepositoryLibrary.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace RestaurantLibrary.DTO
+namespace RestaurantRepositoryLibrary.DTO
 {
     public class CustomerFeedback
     {

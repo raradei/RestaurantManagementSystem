@@ -1,4 +1,4 @@
-﻿using RestaurantLibrary.DTO;
+﻿using RestaurantRepositoryLibrary.DTO;
 using System.ComponentModel.DataAnnotations;
 
 namespace CustomerFeedbackAPI.Models
