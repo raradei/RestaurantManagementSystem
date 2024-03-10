@@ -7,13 +7,9 @@ services:
       - 5432:5432
     environment:
       - POSTGRES_PASSWORD=admin
-      - POSTGRES_USER=admin 
-      - POSTGRES_DB=restaurant_management_system
+      - POSTGRES_USER=admin
     networks:
         - api-network
-    # enable persistence
-    # volumes:
-    #   - db-data:/var/lib/postgresql/data
 
   swaggerservice:
     image: ${DOCKER_REGISTRY-}swaggerservice
@@ -62,8 +58,5 @@ services:
 networks:
   api-network:
     driver: bridge
-
-# volumes:
-#   db-data:
 
 

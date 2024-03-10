@@ -23,7 +23,8 @@ namespace RestaurantManagementAPI.Controllers
             try
             {
                 var restaurant = await _restaurantService.GetDetails(id);
-                return restaurant != null ? Ok(restaurant) : NotFound();
+                if (restaurant == null) return NotFound();
+                return Ok(restaurant);
             }
             catch (Exception ex)
             {
