@@ -20,7 +20,7 @@ This project aims to provide an efficient and user-friendly solution for managin
 ### Customer Feedback API
 
 #### Submit Feedback
-- Endpoint: `POST /api/feedbacks`
+- Endpoint: `POST /api/feedbacks/{restaurantId}`
 - Description: Submit feedback about a restaurant.
 - Parameters:
   - RestaurantId: Unique identifier of the restaurant (required)
