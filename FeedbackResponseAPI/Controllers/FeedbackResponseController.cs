@@ -22,6 +22,7 @@ namespace FeedbackResponseAPI.Controllers
             try
             {
                 var createdEntityId = await _feedbackResponseService.CreateResponse(customerFeedbackId, comments);
+                if (createdEntityId == null) return NotFound();
                 return StatusCode((int)HttpStatusCode.Created, createdEntityId);
             }
             catch (Exception ex)
